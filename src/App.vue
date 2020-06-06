@@ -22,8 +22,12 @@
     </v-navigation-drawer>
     <v-app-bar color="green" dark fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer">
-      </v-app-bar-nav-icon>
-      <v-toolbar>Home</v-toolbar>
+        </v-app-bar-nav-icon>
+        <v-app-bar-title>Home</v-app-bar-title>
+        <v-spacer></v-spacer>
+        <v-app-bar-items class="hidden-sm-and-down">
+          <v-btn text to="/movies/add">Add Movie</v-btn>
+        </v-app-bar-items>
     </v-app-bar>
     <v-content>
       <v-container fluid>

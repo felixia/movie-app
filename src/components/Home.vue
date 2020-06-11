@@ -5,10 +5,10 @@
         <v-card-title primary-title>
           <div>
             <div class="headline">
-              <v-btn text :to="`/movies/${movie._id}`">
-              {{ movie.name }}
-            </v-btn>
-          </div>
+              <v-btn text  :to="`/movies/${movie._id}`">
+                {{ movie.name }}
+              </v-btn>
+            </div>
             <span class="grey--text">{{ movie.release_year }} ‧ {{movie.genre }}</span>
           </div>
         </v-card-title>
@@ -34,12 +34,18 @@ export default {
   },
   methods: {
     async fetchMovies() {
+      const token = window.localStorage.getItem('auth');
       return axios({
         method: 'get',
-        url: 'http://localhost:8081/movies',
+        url: '/movies',
+        headers: {
+          Authorization: `JWT ${token}`,
+          'Content-Type': 'application/json',
+        },
       })
         .then((response) => {
           this.movies = response.data.movies;
+          this.current_user = response.data.current_user;
         })
         .catch(() => {});
     },

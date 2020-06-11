@@ -9,7 +9,7 @@
               movie.genre }}</span>
           </div>
         </v-card-title>
-        <h6 class="card-title" v-if="current_user" @click="rate">Rate this movie</h6>
+        <h6 class="card-title"  @click="rate">Rate This Movie</h6>
         <v-card-text>
           {{ movie.description }}
         </v-card-text>
@@ -27,7 +27,7 @@ const wrapper = document.createElement('div');
 const state = {
   note: 0,
 };
-// create component to content
+// crate component to content
 const RatingComponent = Vue.extend({
   data() {
     return { rating: 0 };
@@ -37,7 +37,7 @@ const RatingComponent = Vue.extend({
   },
   template: `
 <div class="rating">
-How was your experience getting help with this issues?
+How was your experience with this Movie?
 <star-rating v-model="rating" :show-rating="false"></star-rating>
 </div>`,
   components: { 'star-rating': StarRating },
@@ -71,7 +71,7 @@ export default {
           data: {
             rate: state.note,
           },
-          url: `http://localhost:8081/movies/rate/${movieId}`,
+          url: `/movies/rate/${movieId}`,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -80,7 +80,7 @@ export default {
             this.$swal(`Thank you for rating! ${state.note}`, 'success');
           })
           .catch((error) => {
-            const message = error.response.data.message;
+            const { message } = error.response.data.message;
             this.$swal('Oh oo!', `${message}`, 'error');
           });
       });
@@ -88,7 +88,7 @@ export default {
     async fetchMovie() {
       return axios({
         method: 'get',
-        url: `http://localhost:8081/movies/${this.$route.params.id}`,
+        url: `/movies/${this.$route.params.id}`,
       })
         .then((response) => {
           this.movie = response.data;

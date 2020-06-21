@@ -8,6 +8,7 @@ import VueSwal from 'vue-swal';
 import App from './App.vue';
 import router from './router';
 import vuetify from './plugins/vuetify';
+import { store } from './store/store';
 
 Vue.use(BootstrapVue);
 Vue.use(Vuetify);
@@ -16,6 +17,7 @@ Vue.use(VueSwal);
 Vue.config.productionTip = false;
 
 new Vue({
+  store,
   router,
   vuetify,
   render: (h) => h(App),

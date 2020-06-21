@@ -3,8 +3,7 @@
     <v-text-field label="Movie Name" v-model="name" :rules="nameRules" required></v-text-field>
     <v-text-field name="input-7-1" label="Movie Description" v-model="description" multi-line>
     </v-text-field>
-    <v-select label="Movie Release Year" v-model="release_year" :items="years"
-    :rules="releaseRules" required>
+    <v-select label="Movie Release Year" v-model="release_year" :items="years" :rules="releaseRules" required>
     </v-select>
     <v-text-field label="Movie Genre" v-model="genre" required :rules="genreRules">
     </v-text-field>
@@ -48,35 +47,15 @@ export default {
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        return axios({
-          method: 'post',
-          data: {
-            name: this.name,
-            description: this.description,
-            release_year: this.release_year,
-            genre: this.genre,
-          },
-          url: '/movies',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-
-        })
-          .then(() => {
-            this.$swal(
-              'Great!',
-              'Movie added successfully!',
-              'success',
-            );
-            this.$router.push({ name: 'Home' });
-            this.$refs.form.reset();
-          }).catch(() => {
-            this.$swal(
-              'Oh oo!',
-              'Could not add the movie!',
-              'error',
-            );
-          });
+        const movie = {
+          name: this.name,
+          description: this.description,
+          release_year: this.release_year,
+          genre: this.genre,
+        }
+        this.$store.dispatch("addMovie", movie);
+        this.$refs.form.reset();
+        this.$router.push({ name: 'Home' });
       }
       return true;
     },

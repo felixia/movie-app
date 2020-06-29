@@ -50,12 +50,5 @@ module.exports.controller = (app) => {
       res.send(movie);
     });
   });
-
-  // send a dummy test
-app.get("/dummy_test", function(req, res) {
-  res.send({
-    name: 'John'
-  })
-});
-
+  
 };

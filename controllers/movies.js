@@ -51,4 +51,11 @@ module.exports.controller = (app) => {
     });
   });
 
+  // send a dummy test
+app.get("/dummy_test", function(req, res) {
+  res.send({
+    name: 'John'
+  })
+});
+
 };
